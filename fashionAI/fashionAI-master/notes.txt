@@ -1,0 +1,55 @@
+$ pip install flask
+$ pip install flask_sqlalchemy
+$ pip install gunicorn
+$ pip install psycopg2
+$ pip install pandas
+$ pip freeze > requirements.txt
+$ pip install -r requirements.txt
+#==== Heroku deployment ====================
+------------------------------
+$ touch Procfile
+------------------------------
+web: gunicorn maindirectory.app:app
+------------------------------
+------------------------------
+$ touch runtime.txt
+------------------------------
+python-3.7.5
+------------------------------
+------------------------------
+$ touch initdb.py
+------------------------------
+from maindirectory.app import db
+# db.drop_all()
+db.create_all()
+------------------------------
+$ heroku login
+$ heroku create appname
+$ git remote -v   # This is only for info
+$ heroku git:remote -a appname
+$ git push heroku master
+$ heroku open
+------------------------------
+If you are using postgresql
+------------------------------
+$ heroku addons:create heroku-postgresql:hobby-dev --app appname
+# Or goto Heroku -> Resources : Add-ons -> create a database in heroku
+$ heroku run python initdb.py
+------------------------------
+Make changes and update
+------------------------------
+$ heroku git:remote -a appname
+$ git push heroku master
+$ heroku open
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+
+$ conda 
+$ conda info --envs
+$ conda create -n envname python=3.7
+$ conda activate envname
+$ conda deactivate
+$ conda remove --name envname --all
